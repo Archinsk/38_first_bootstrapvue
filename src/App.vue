@@ -3,7 +3,9 @@
     <Header />
     <div class="container">
       <AddTaskForm @add-task="addNewTask($event)" />
-      <TaskList :listItems="items" />
+      <div class="taskList">
+        <TaskItem v-for="item of items" :key="item.id" :taskItem="item" />
+      </div>
     </div>
     <!--      -->
     <div id="nav">
@@ -15,10 +17,9 @@
 </template>
 
 <script>
-import Header from "@/components/header/Header";
-import AddTaskForm from "@/components/addtaskform/AddTaskForm";
-import TaskList from "@/components/tasklist/TaskList";
-
+import Header from "@/components/Header";
+import AddTaskForm from "@/components/AddTaskForm";
+import TaskItem from "./components/TaskItem";
 export default {
   name: "App",
   data() {
@@ -34,7 +35,7 @@ export default {
   components: {
     Header,
     AddTaskForm,
-    TaskList,
+    TaskItem,
   },
   methods: {
     addNewTask(event) {
@@ -47,9 +48,6 @@ export default {
       this.items.push(newTask);
       this.inputValue = "";
     },
-    // changeInputValue(inputText) {
-    //     this.inputValue = inputText
-    // }
   },
 };
 </script>
